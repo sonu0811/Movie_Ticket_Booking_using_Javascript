@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Movie Ticket Booking - Book a Movie</title>
+    <link rel="stylesheet" type="text/css" href="style1.css">
+	  <!--script type="text/javascript" src="script.js"></script--> 
+  </head>
+  <body>
+    <header>
+      <h1>Movie Ticket Booking</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="booking.html">Booking</a></li>
+          <li><a href="now-showing.html">Now Showing</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <form action="#" id="formSubmission" method="get">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="enter your name" required /><br />
+      
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br />
+      
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required /><br />
+      
+        <label for="movie">Movie:</label>
+        <select id="movie" name="movie" required>
+          <option value="">Select a movie</option>
+          <option value="ALIEN">ALIEN</option>
+          <option value="VIKRAM">VIKRAM</option>
+          <option value="The Kerala Story">The Kerala Story</option>
+        </select><br />
+      
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required /><br />
+      
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required /><br />
+      
+        <label for="seats">Number of seats:</label>
+        <input type="number" id="seats" name="seats" min="1" max="10" required /><br />
+
+        <div id="movieList"></div>
+      
+      <div id="seatSelection"></div>
+      
+      <div id="totalSeats"></div>
+      
+      <div id="totalPrice"></div>
+      
+      <div id="timer"></div>
+      
+      
+      
+    
+      <div id="seatingChart"></div>
+      
+        <button type="submit">Book Now</button>
+      </form>
+
+      <div id="timer"></div>
+
+            
+        <script>
+          // define an object that stores the seat information for each movie
+const seatData = {
+  "ALIEN": {
+    totalSeats: 100,
+    bookedSeats: [10, 15, 20, 25, 30]
+  },
+  "VIKRAM": {
+    totalSeats: 80,
+    bookedSeats: [5, 10, 15, 20, 25]
+  },
+  "The Kerala Story": {
+    totalSeats: 120,
+    bookedSeats: [35, 40, 45, 50, 55]
+  }
+};
+
+// function to generate the seating chart for a specific movie
+function generateSeatingChart(movieName) {
+  // get the seat data for the movie
+  const data = seatData[movieName];
+
+  // create an array of all the seat numbers
+  const seatNumbers = Array.from({length: data.totalSeats}, (_, i) => i + 1);
+
+  // create a new div to hold the seating chart
+  const seatingChartDiv = document.createElement("div");
+  seatingChartDiv.setAttribute("class", "seating-chart");
+
+  // create a div for each seat and add it to the seating chart
+  seatNumbers.forEach(seatNumber => {
+    const seatDiv = document.createElement("div");
+    seatDiv.setAttribute("class", "seat");
+    seatDiv.setAttribute("data-seat-number", seatNumber);
+
+    // check if the seat is booked
+    if (data.bookedSeats.includes(seatNumber)) {
+      seatDiv.classList.add("booked");
+    } else {
+      seatDiv.classList.add("available");
+      // add a click event listener to the available seats to select them
+      seatDiv.addEventListener("click", () => {
+        seatDiv.classList.toggle("selected");
+        updateTotalSeats();
+        updateTotalPrice();
+      });
+    }
+
+    // add the seat div to the seating chart div
+    seatingChartDiv.appendChild(seatDiv);
+  });
+
+  // replace the current seating chart with the new one
+  const seatingChartContainer = document.getElementById("seatingChart");
+  seatingChartContainer.innerHTML = "";
+  seatingChartContainer.appendChild(seatingChartDiv);
+}
+
+// function to update the total number of seats selected
+function updateTotalSeats() {
+  const selectedSeats = document.querySelectorAll(".seat.selected");
+  const totalSeatsDiv = document.getElementById("totalSeats");
+  totalSeatsDiv.innerHTML = `Total seats: ${selectedSeats.length}`;
+}
+
+// function to update the total price based on the number of seats selected
+function updateTotalPrice() {
+  const selectedSeats = document.querySelectorAll(".seat.selected");
+  const totalPriceDiv = document.getElementById("totalPrice");
+  const pricePerSeat = 100;
+  const totalPrice = selectedSeats.length * pricePerSeat;
+  totalPriceDiv.innerHTML = `Total price: Rs.${totalPrice}`;
+}
+
+// call the generateSeatingChart function for the default movie
+generateSeatingChart("The Kerala Story");
+
+//
+
+function generateSeatingChart(movieName) {
+  // get the seat data for the movie
+  const data = seatData[movieName];
+
+  // create an array of all the seat numbers
+  const seatNumbers = Array.from({length: data.totalSeats}, (_, i) => i + 1);
+
+  // create a new div to hold the seating chart
+  const seatingChartDiv = document.createElement("div");
+  seatingChartDiv.setAttribute("class", "seating-chart");
+
+  // create a div for each seat and add it to the seating chart
+  seatNumbers.forEach(seatNumber => {
+    const seatDiv = document.createElement("div");
+    seatDiv.setAttribute("class", "seat");
+    seatDiv.setAttribute("data-seat-number", seatNumber);
+
+    // check if the seat is booked
+    if (data.bookedSeats.includes(seatNumber)) {
+      seatDiv.classList.add("booked");
+    } else {
+      seatDiv.classList.add("available");
+      // add a click event listener to the available seats to select them
+      seatDiv.addEventListener("click", () => {
+        seatDiv.classList.toggle("selected");
+        updateTotalSeats();
+        updateTotalPrice();
+      });
+    }
+
+    // add the seat div to the seating chart div
+    seatingChartDiv.appendChild(seatDiv);
+  });
+
+  // replace the current seating chart with the new one
+  const seatingChartContainer = document.getElementById("seatingChart");
+  seatingChartContainer.innerHTML = "";
+  seatingChartContainer.appendChild(seatingChartDiv);
+}
+
+// Timer
+
+// Define the start time and end time for the shows (in this example, shows start at 9:30 AM and end at 9:30 PM)
+const startTime = new Date();
+startTime.setHours(9);
+startTime.setMinutes(30);
+startTime.setSeconds(0);
+const endTime = new Date();
+endTime.setHours(21);
+endTime.setMinutes(30);
+endTime.setSeconds(0);
+
+// Define the duration between shows (in this example, shows start every 3 hours)
+const showDuration = 3; // in hours
+
+// Calculate the time of the next show
+let nextShowTime = startTime.getTime();
+while (nextShowTime <= new Date().getTime()) {
+  nextShowTime += showDuration * 60 * 60 * 1000;
+}
+
+// Update the countdown every second
+const timer = setInterval(function() {
+
+  // Get the current date and time
+  const now = new Date().getTime();
+
+  // Calculate the time remaining until the next show
+  let timeRemaining = nextShowTime - now;
+
+  // If the next show has already started, calculate the time remaining until the next show after that
+  while (timeRemaining < 0) {
+    nextShowTime += showDuration * 60 * 60 * 1000;
+    timeRemaining = nextShowTime - now;
+  }
+
+  // Calculate the days, hours, minutes, and seconds remaining
+  const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+  // Display the countdown timer
+  document.getElementById("timer").innerHTML = "Time until next show: " + days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the countdown is finished, stop the timer and display a message
+  if (timeRemaining < 0) {
+    clearInterval(timer);
+    document.getElementById("timer").innerHTML = "The show has already started.";
+  }
+}, 1000);
+
+
+        </script>
+
+    </main>
+    
+  </body>

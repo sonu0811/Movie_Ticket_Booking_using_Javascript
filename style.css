@@ -1,0 +1,115 @@
+/* Global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+html {
+  height: 100%;
+}
+
+  body {
+    height: 100%;
+    background-color: #161a36 ;
+    font-size: 16px;
+  }
+
+  .bg-image {
+  /* The image used */
+  background-image: url("seat-chair-theatre-dark.jpg");
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+  .bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  position: absolute;
+  top: 5%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 25%;
+  padding: 20px;
+  text-align: center;
+  }
+
+  /* Position the navbar container inside the image */
+.container {
+  position: absolute;
+  margin: 20px;
+  width: auto;
+}
+
+/* The navbar */
+.topnav {
+  overflow: hidden;
+}
+
+/* Navbar links */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 15px 15px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: burlywood;
+  color: #000000;
+}
+
+.container2 {
+  position: absolute;
+  margin: 20px;
+  width: 50%;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+  
+.bottom-left h2 {
+  font-size: 32px;
+  margin-bottom: 510px;
+  color: burlywood;
+}
+
+.bottom-left ul {
+  margin: 10px 0;
+  margin-bottom: 50px;
+}
+
+.bottom-left ul li {
+  margin: 10px 0;
+  margin-bottom: 40px;
+}
+
+.bottom-left ul li a{
+  color: burlywood;
+}
+
+.container3{
+  
+  position: absolute;
+  margin: 20px;
+  width: 50%;
+}
+
